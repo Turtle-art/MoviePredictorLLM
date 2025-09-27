@@ -36,7 +36,3 @@ Built with:
 * Add **user authentication** for saved histories.
 * Deploy backend + frontend to the cloud (Vercel).
 * Convert it into a RAG
-
----
-
-Do you want me to also create a **sample `index.js` backend file** (with Ollama + SQLite integration) and a **React frontend stub** so this README matches actual runnable code?
