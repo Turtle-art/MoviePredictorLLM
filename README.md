@@ -20,15 +20,6 @@ Built with:
 
 ---
 
-## Tech Stack
-
-* **Frontend:** React, Axios, Tailwind (optional for styling)
-* **Backend:** Node.js, Express, SQLite3
-* **LLM Integration:** Ollama LLM
-* **Database:** SQLite
-
----
-
 ## What is Ollama?
 
 Ollama is a **local runtime for LLMs** — it lets you download, run, and manage large language models on your own machine. This gives you **privacy, control, and no per-request costs**, while still offering a simple CLI and API.
