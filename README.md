@@ -35,4 +35,3 @@ Built with:
 * Support multiple **LLM providers** (e.g., OpenAI, Anthropic).
 * Add **user authentication** for saved histories.
 * Deploy backend + frontend to the cloud (Vercel).
-* Convert it into a RAG
