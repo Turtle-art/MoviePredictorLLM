@@ -17,18 +17,42 @@ app.post("/api/movie", async (req, res) => {
     }
 
     const response = await client.chat({
-      model: "tinyllama", // Replace with your desired model
+      model: "tinyllama", // Replace with a better model
       messages: [
         {
           role: "user",
-          content: `Given the movie title "${name}", predict its genre and provide a short description.`,
+          content: `Given the movie title "${name}", respond ONLY with a single JSON object, nothing else. 
+            The object MUST have exactly these keys:
+            {
+              "genre": "Single genre only (like Action, Comedy, Drama, Sci-Fi, etc.)",
+              "description": "One-sentence description"
+            }`,
         },
       ],
     });
 
-    const output = response.message?.content || "No response";
+    let rawOutput = response.message?.content || "{}";
+    const match = rawOutput.match(/\{[\s\S]*?\}/);
+    if (match) {
+      rawOutput = match[0];
+    }
 
-    res.json({ movie: name, result: output });
+    let parsed;
+    try {
+      parsed = JSON.parse(rawOutput);
+    } catch (err) {
+      console.warn("Failed JSON parse, fallback:", rawOutput);
+      parsed = {};
+    }
+
+    const genre = parsed.genre || "Unknown";
+    const description = parsed.description || "No description available";
+
+    res.json({
+      movie: name,
+      genre,
+      description,
+    });
   } catch (err) {
     console.error("Error:", err);
     res.status(500).json({ error: "Something went wrong" });
